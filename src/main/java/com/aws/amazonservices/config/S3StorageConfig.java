@@ -9,6 +9,7 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class S3StorageConfig {
@@ -23,6 +24,7 @@ public class S3StorageConfig {
 	private String region;
 	
 	@Bean
+	@Primary
 	public AmazonS3 generateS3Client() {
 		AWSCredentials creds = new BasicAWSCredentials(accessKey, secretKey);
 		return AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(creds)).withRegion(region).build();
